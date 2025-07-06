@@ -103,6 +103,22 @@
   
   <body>
     <div id="root"></div>
+
+    <!-- PASTE THIS RIGHT BEFORE THE CLOSING </body> TAG -->
+<div class="video-container" style="max-width:800px; margin:2rem auto; border-radius:8px; overflow:hidden;">
+  <video 
+    controls 
+    autoplay 
+    muted 
+    loop 
+    playsinline
+    style="width:100%; display:block;"
+  >
+    <source src="videos/welcome.mp4" type="video/mp4">
+    Your browser doesn't support HTML5 video.
+  </video>
+</div>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
