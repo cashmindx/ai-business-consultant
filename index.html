@@ -20,6 +20,66 @@
 <script>
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="lgusYPJmVyRRvfgHzzICz";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
+
+<!-- Voice-Enabled Chatbot Script -->
+<button id="voice-btn" title="Push to talk">🎤</button>
+
+<script>
+  // Initialize voice recognition
+  const voiceBtn = document.getElementById('voice-btn');
+  let recognition;
+  
+  // Check browser support
+  if ('webkitSpeechRecognition' in window) {
+    recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.continuous = false;
+    recognition.lang = 'en-US';
+    recognition.interimResults = false;
+
+    voiceBtn.addEventListener('click', () => {
+      if (voiceBtn.textContent === "🎤") {
+        recognition.start();
+        voiceBtn.textContent = "🎙️ Listening...";
+      } else {
+        recognition.stop();
+        voiceBtn.textContent = "🎤";
+      }
+    });
+
+    recognition.onresult = (event) => {
+      const query = event.results[0][0].transcript;
+      if (window.chatbase) window.chatbase.sendMessage(query);
+    };
+
+    recognition.onerror = () => voiceBtn.textContent = "🎤 (Error)";
+    recognition.onend = () => voiceBtn.textContent = "🎤";
+    
+  } else {
+    voiceBtn.style.display = 'none';
+    console.log("Voice not supported in this browser");
+  }
+</script>
+
+<style>
+  #voice-btn {
+    position: fixed;
+    bottom: 100px;
+    right: 30px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #4F46E5;
+    color: white;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+    transition: all 0.2s;
+  }
+  #voice-btn:hover { transform: scale(1.1); }
+  #voice-btn:active { transform: scale(0.95); }
+</style>
   
   <body>
     <div id="root"></div>
