@@ -78,8 +78,7 @@ const PricingSection = () => {
       {/* Payment Info */}
       <div className="text-center mt-12 p-8 bg-slate-800/30 backdrop-blur-sm rounded-2xl border border-purple-500/20 max-w-2xl mx-auto">
         <h3 className="text-white text-xl font-semibold mb-4">💳 Secure Payment Information</h3>
-        <p className="text-slate-300 mb-2"><strong>PayPal:</strong> mulondoherbert@gmail.com</p>
-        <p className="text-slate-300 mb-4"><strong>Support:</strong> theknightmentor@gmail.com</p>
+        <p className="text-slate-300 mb-4"><strong>Payment Method:</strong> PayPal (details provided after signup)</p>
         <div className="flex items-center justify-center text-purple-300">
           <Shield className="h-4 w-4 mr-2" />
           <span className="text-sm">We respect anonymity – no personal data required!</span>
