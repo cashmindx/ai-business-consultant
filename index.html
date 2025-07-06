@@ -21,6 +21,26 @@
 (function(){if(!window.chatbase||window.chatbase("getState")!=="initialized"){window.chatbase=(...arguments)=>{if(!window.chatbase.q){window.chatbase.q=[]}window.chatbase.q.push(arguments)};window.chatbase=new Proxy(window.chatbase,{get(target,prop){if(prop==="q"){return target.q}return(...args)=>target(prop,...args)}})}const onLoad=function(){const script=document.createElement("script");script.src="https://www.chatbase.co/embed.min.js";script.id="lgusYPJmVyRRvfgHzzICz";script.domain="www.chatbase.co";document.body.appendChild(script)};if(document.readyState==="complete"){onLoad()}else{window.addEventListener("load",onLoad)}})();
 </script>
 
+ <script>
+  window.chatbaseConfig = {
+    chatbotId: "YOUR_CHATBOT_ID", // Keep your existing ID
+    onMessageReceived: (message) => {
+      // Voice reply feature
+      if ('speechSynthesis' in window) {
+        const speech = new SpeechSynthesisUtterance();
+        speech.text = message.text;
+        
+        // Optional: Customize voice
+        const voices = window.speechSynthesis.getVoices();
+        speech.voice = voices.find(v => v.lang.includes('en-')); // English voice
+        speech.rate = 0.9; // Slightly slower
+        
+        window.speechSynthesis.speak(speech);
+      }
+    }
+  };
+</script> 
+
 <!-- Voice-Enabled Chatbot Script -->
 <button id="voice-btn" title="Push to talk">🎤</button>
 
